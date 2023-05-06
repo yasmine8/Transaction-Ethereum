@@ -64,7 +64,6 @@ const createEthereumContract = () => {
             if (!ethereum) return alert("Please install MetaMask.");
       
             const accounts = await ethereum.request({ method: "eth_accounts" });
-            console.log(accounts);
              if (accounts.length) {
               setCurrentAccount(accounts[0]);
       
@@ -127,9 +126,7 @@ const createEthereumContract = () => {
               const transactionHash = await transactionsContract.addToBlockchain(addressTo, parsedAmount, message, keyword);
       
               setIsLoading(true);
-              console.log(`Loading - ${transactionHash.hash}`);
               await transactionHash.wait();
-              console.log(`Success - ${transactionHash.hash}`);
               setIsLoading(false);
       
               const transactionsCount = await transactionsContract.getTransactionCount();
