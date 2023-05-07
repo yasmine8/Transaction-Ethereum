@@ -12,11 +12,6 @@ const createEthereumContract = () => {
     const signer = provider.getSigner();
     const transactionsContract = new ethers.Contract(contractAddress, contractABI, signer);
 
-    console.log({
-        provider,
-        signer,
-        transactionsContract
-    });
 
     return transactionsContract;
     };
@@ -26,12 +21,12 @@ const createEthereumContract = () => {
         const [currentAccount, setCurrentAccount] = useState("");
         const [isLoading, setIsLoading] = useState(false);
         const [transactionCount, setTransactionCount] = useState(localStorage.getItem("transactionCount"));
-       // const [transactions, setTransactions] = useState([]);
+        const [transactions, setTransactions] = useState([]);
       
          const handleChange = (e, name) => {
           setformData((prevState) => ({ ...prevState, [name]: e.target.value }));
         };
-        /*
+        
         const getAllTransactions = async () => {
           try {
             if (ethereum) {
@@ -58,7 +53,7 @@ const createEthereumContract = () => {
             console.log(error);
           }
         };
-       */
+       
         const checkIfWalletIsConnect = async () => {
           try {
             if (!ethereum) return alert("Please install MetaMask.");
@@ -67,7 +62,7 @@ const createEthereumContract = () => {
              if (accounts.length) {
               setCurrentAccount(accounts[0]);
       
-              //getAllTransactions();
+              getAllTransactions();
             } else {
               console.log("No accounts found");
             } 
@@ -76,7 +71,7 @@ const createEthereumContract = () => {
           }
         };
       
-       /*  const checkIfTransactionsExists = async () => {
+         const checkIfTransactionsExists = async () => {
           try {
             if (ethereum) {
               const transactionsContract = createEthereumContract();
@@ -90,7 +85,7 @@ const createEthereumContract = () => {
             throw new Error("No ethereum object");
           }
         };
-       */
+       
          const connectWallet = async () => {
           try {
             if (!ethereum) return alert("Please install MetaMask.");
@@ -145,17 +140,17 @@ const createEthereumContract = () => {
       
         useEffect(() => {
           checkIfWalletIsConnect();
-          //checkIfTransactionsExists();
+          checkIfTransactionsExists();
         }, []);
       
         return (
           <TransactionContext.Provider
             value={{
-              //transactionCount,
+              transactionCount,
               connectWallet,
-              //transactions,
+              transactions,
               currentAccount,
-              //isLoading,
+              isLoading,
               sendTransaction,
               handleChange,
               formData,
