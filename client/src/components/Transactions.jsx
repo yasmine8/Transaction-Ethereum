@@ -3,9 +3,8 @@ import React, { useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 import { shortenAddress } from "../utils/shortenAddress";
 
-const TransactionsCard = ({ addressTo, addressFrom, timestamp, message, keyword, amount, url }) => {
+const TransactionsCard = ({ addressTo, addressFrom, timestamp, message, amount }) => {
   
-  console.log(addressFrom);
 
   return (
     <div className="bg-[#181918] m-4 flex flex-1
@@ -21,27 +20,25 @@ const TransactionsCard = ({ addressTo, addressFrom, timestamp, message, keyword,
        <div className="flex flex-col items-center w-full mt-3">
         <div className="display-flex justify-start w-full mb-6 p-2">
           <a href={`https://sepolia.etherscan.io/address/${addressFrom}`} target="_blank" rel="noreferrer">
-            <p className="text-white text-base">From: {shortenAddress(addressFrom)}</p>
+            <p className=" text-white text-base">From: <u className="underline">{shortenAddress(addressFrom)}</u></p>
           </a>
           <a href={`https://sepolia.etherscan.io/address/${addressTo}`} target="_blank" rel="noreferrer">
-            <p className="text-white text-base">To: {shortenAddress(addressTo)}</p>
+            <p className="text-white text-base">To: <u className="underline">{shortenAddress(addressTo)}</u></p>
           </a>
           <p className="text-white text-base">Amount: {amount} ETH</p>
           {message && (
             <>
               <br />
-              <p className="text-white text-base">Message: {message}</p>
+              <p className="text-white text-base">Message: <strong>{message}</strong></p>
             </>
           )}
+        <p className="font-normal text-gray-700 dark:text-gray-400">{timestamp}</p>
         </div>
         {/* <img
           src={gifUrl || url}
           alt="nature"
           className="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover"
           /> */}
-        <div className="bg-black p-3 px-5 w-max rounded-3xl -mt-5 shadow-2xl">
-          <p className="text-[#37c7da] font-bold">{timestamp}</p>
-        </div>
       </div> 
         
     </div>
@@ -51,7 +48,6 @@ const TransactionsCard = ({ addressTo, addressFrom, timestamp, message, keyword,
 const Transactions = () => {
   const { transactions, currentAccount } = useContext(TransactionContext);
   
-  console.log(transactions);
   
   return (
     <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
