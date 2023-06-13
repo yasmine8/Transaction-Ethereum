@@ -1,5 +1,5 @@
 
-export const contractABI = [
+const contractABI = [
     {
       "anonymous": false,
       "inputs": [
@@ -114,4 +114,5 @@ export const contractABI = [
       "type": "function"
     }
   ];
-export const contractAddress =import.meta.env.VITE_REACT_APP_CONTRACT_ADDRESS;
+
+export {contractABI};
